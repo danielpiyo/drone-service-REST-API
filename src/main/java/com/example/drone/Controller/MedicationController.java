@@ -85,7 +85,7 @@ public class MedicationController {
 			if (_medicationData.isPresent() && _droneData.isPresent()) {
 				Medication _med = _medicationData.get();
 				Drone _drn = _droneData.get();
-				if (_med.getMedicationWeight() < 500 && drone.getBetteryCapacity() > 25) {
+				if (_med.getMedicationWeight() <= _drn.getWeightLimit()  && _drn.getBetteryCapacity() > 25) {
 					_med.setSerialNumber(drone.getSerialNumber());
 					_drn.setState("LOADED");
 				} else {
