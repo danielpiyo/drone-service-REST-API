@@ -130,11 +130,5 @@ public String toString() {
 			+ serialNumber + ", medicationName=" + medicationName + ", medicationWeight=" + medicationWeight
 			+ ", image=" + image + "]";
 }
-	
-	
-
-
-
-
 		  	  	  	
 }
