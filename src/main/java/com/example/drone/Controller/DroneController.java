@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.drone.Model.Drone;
+import com.example.drone.Model.Medication;
 import com.example.drone.Repository.DroneRepository;
+import com.example.drone.Repository.MedicationRepository;
 import com.sun.istack.NotNull;
 
 
@@ -27,7 +31,31 @@ public class DroneController {
 
 	@Autowired
 	DroneRepository droneRepository;
+	
+	@Autowired
+	MedicationRepository medicationRepository;
+	
+//	preloading data into H2
 
+	@Bean
+	InitializingBean sendDatabase() {
+	    return () -> {
+	        droneRepository.save(new Drone(null, "D-K-00-56MO1", "Auto-Model1", (long) 200, 80, "IDLE"));
+	        droneRepository.save(new Drone(null, "D-K-00-56MO2", "Auto-Model1", (long) 350, 60, "LOADED"));
+	        droneRepository.save(new Drone(null, "D-K-00-56MO3", "Auto-Model1", (long) 420, 20, "IDLE"));
+	        droneRepository.save(new Drone(null, "D-K-00-56MO7", "Auto-Model4", (long) 200, 80, "IDLE"));
+	        droneRepository.save(new Drone(null, "D-K-00-56MO8", "Auto-Model3", (long) 400, 14, "LOADED"));
+	        droneRepository.save(new Drone(null, "D-K-00-56MO9", "Auto-Model3", (long) 120, 20, "IDLE"));
+	        
+	        medicationRepository.save(new Medication(null, "MED-002", null, "OXIBRO", (long) 50, null));
+	        medicationRepository.save(new Medication(null, "MED-003", null, "PARACETAMOL", (long) 750, null));
+	        medicationRepository.save(new Medication(null, "MED-004",null, "AURGMENTINE", (long) 30, null));
+	        medicationRepository.save(new Medication(null, "MED-008", null, "CAKE MAX", (long) 50, null));
+	        medicationRepository.save(new Medication(null, "MED-013", null, "PIAJET", (long) 600, null));
+	        medicationRepository.save(new Medication(null, "MED-0034", null, "MALARIAQUINE", (long) 30, null));
+	      };
+	   }
+	
 	
 //	Pulling all available drones
 	@GetMapping(path = "/allDrones", produces = "application/json")
@@ -47,7 +75,8 @@ public class DroneController {
 			}
 			return new ResponseEntity<>(drones, HttpStatus.OK);
 		} catch (Exception error) {
-			throw new RuntimeException("Internal Server Error");
+			error.printStackTrace();
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -71,7 +100,8 @@ public class DroneController {
 			Drone _data = droneRepository.save(drone);
 			return new ResponseEntity<>(_data, HttpStatus.CREATED);
 		} catch (Exception error) {
-			throw new RuntimeException("Internal Server Error");
+			error.printStackTrace();
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -88,7 +118,8 @@ public class DroneController {
 				return new ResponseEntity<>(drones, HttpStatus.OK);
 			}
 		} catch (Exception error) {
-			throw new RuntimeException("Internal Server Error");
+			error.printStackTrace();
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -104,7 +135,8 @@ public class DroneController {
 				return new ResponseEntity<>(drones, HttpStatus.OK);
 			}
 		} catch (Exception error) {
-			throw new RuntimeException("Internal Server Error");
+			error.printStackTrace(); 
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

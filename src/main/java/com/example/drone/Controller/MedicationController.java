@@ -46,6 +46,7 @@ public class MedicationController {
 			return new ResponseEntity<>(medication, HttpStatus.OK);
 
 		} catch (Exception error) {
+			error.printStackTrace(); 
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -70,6 +71,7 @@ public class MedicationController {
 			Medication _data = medicationRepository.save(medication);
 			return new ResponseEntity<>(_data, HttpStatus.CREATED);
 		} catch (Exception error) {
+			error.printStackTrace(); 
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -89,14 +91,15 @@ public class MedicationController {
 					_med.setSerialNumber(drone.getSerialNumber());
 					_drn.setState("LOADED");
 				} else {
-					throw new RuntimeException("Sorry your Medication wight or Drone Battery level Not standard");
+					throw new RuntimeException("Medication wight or Drone Battery level Not standard");
 				}
 				return new ResponseEntity<>(medicationRepository.save(_med), HttpStatus.OK);
 			} else {
-				throw new RuntimeException("Sorry your Medication with code: " + medicationCode + "No longer in stock");
+				throw new RuntimeException("Medication with code: " + medicationCode + "No longer in stock");
 			}
 
 		} catch (Exception error) {
+			error.printStackTrace(); 
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

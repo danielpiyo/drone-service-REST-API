@@ -1,4 +1,9 @@
 #" drone-service-REST-API" 
+[[_TOC_]]
+
+---
+
+:scroll: **START**
 
 
 ### Introduction
@@ -62,3 +67,83 @@ While implementing your solution **please take care of the following requirement
 - Advice: Show us how you work through your commit history.
 
 ---
+
+### How to build
+
+#### Requirements
+
+- Java 8
+- Java IDE (STS)
+- MYSQL databse (Optional you can use in-memory database)
+- Postman(For testing ) 
+
+### Steps by step for building and running the project locally
+
+- You can Clone this project from gitlab using this command git clone https://oauth:glpat-2g_hezzv3yxrpmPeE49T@gitlab.com/musala-coding-tasks-solutions/daniel-opiyo.git
+
+![img_8.png](img_8.png)
+- Open the cloned project in Spring Boot Suite 4 or any other  of your preference
+
+- Go to maven the update Project to update all the maven dependencies
+
+- Maven Build the project and run
+
+- Before running, you can run the JUnit test cases to assert that everything is working correctly (I have included some of the JUnit tests)
+
+### Testing the API
+Open Postman
+![img_9.png](img_9.png)
+----
+
+- **Registering a drone** localhost:8080/api/registerDrone
+The payload and response should be in json format like this
+
+![img_7.png](img_7.png)
+**Checking available drones for loading;**
+
+
+Before loading a drone with Medication you can first check the available drones
+
+**localhost:8080/api/drones/available**
+
+![img_6.png](img_6.png)
+---
+
+- **Loading a drone with medication items;**
+
+**localhost:8080/api/medication/load/{MedicationCode}**
+
+![img_3.png](img_3.png)
+The payload will have the following fields
+
+- serialNumber is the unique serial for the drone being loaded from RequestBody
+- medicationCode is the unique code for the medication load being loaded to the drone. Its is passed as a path variable
+- We update the Medication table and set the serialNumber column to the serial number of the drone
+
+N/B For this case we don't have the source/destination of the medication
+
+N/B For a medication o be loaded to a drone they both must meet the set standards
+- Drone not to be loaded with more weight that it can carry
+- Drone Battery not to be less than 25%
+
+the Medication items to be loaded for testing are code : **MED-002, MED-003, MED-004, MED-008, MED-013** (Passed as a path variable)
+
+the Drones to be loaded for testing are of serial numbers : **D-K-00-56MO1, D-K-00-56MO2, D-K-00-56MO3, D-K-00-56MO7, D-K-00-56MO9**  (passed in the request body)
+
+
+---
+- **Checking loaded medication items for a given drone;**
+
+**localhost:8080/api/medication/drone/{serialNumber}**
+
+- Check which medication item is loaded to a specific drone.
+
+![img_4.png](img_4.png)
+
+- **Check drone battery level for a given drone;**
+
+**localhost:8080/api/drone/battery/{serialNumber}**
+
+![img_5.png](img_5.png)
+---
+:scroll: **END** 
