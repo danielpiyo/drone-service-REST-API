@@ -81,7 +81,7 @@ While implementing your solution **please take care of the following requirement
 
 - You can Clone this project from gitlab using this command git clone https://oauth:glpat-2g_hezzv3yxrpmPeE49T@gitlab.com/musala-coding-tasks-solutions/daniel-opiyo.git
 
-![img_8.png](img_8.png)
+![images/img_8.png](images/img_8.png)
 - Open the cloned project in Spring Boot Suite 4 or any other  of your preference
 
 - Go to maven the update Project to update all the maven dependencies
@@ -92,13 +92,13 @@ While implementing your solution **please take care of the following requirement
 
 ### Testing the API
 Open Postman
-![img_9.png](img_9.png)
+![images/img_9.png](images/img_9.png)
 ----
 
 - **Registering a drone** localhost:8080/api/registerDrone
 The payload and response should be in json format like this
 
-![img_7.png](img_7.png)
+![images/img_7.png](images/img_7.png)
 **Checking available drones for loading;**
 
 
@@ -106,14 +106,14 @@ Before loading a drone with Medication you can first check the available drones
 
 **localhost:8080/api/drones/available**
 
-![img_6.png](img_6.png)
+![images/img_6.png](images/img_6.png)
 ---
 
 - **Loading a drone with medication items;**
 
 **localhost:8080/api/medication/load/{MedicationCode}**
 
-![img_3.png](img_3.png)
+![images/img_3.png](images/img_3.png)
 The payload will have the following fields
 
 - serialNumber is the unique serial for the drone being loaded from RequestBody
@@ -138,12 +138,12 @@ the Drones to be loaded for testing are of serial numbers : **D-K-00-56MO1, D-K-
 
 - Check which medication item is loaded to a specific drone.
 
-![img_4.png](img_4.png)
+![images/img_4.png](images/img_4.png)
 
 - **Check drone battery level for a given drone;**
 
 **localhost:8080/api/drone/battery/{serialNumber}**
 
-![img_5.png](img_5.png)
+![images/img_5.png](images/img_5.png)
 ---
 :scroll: **END** 
